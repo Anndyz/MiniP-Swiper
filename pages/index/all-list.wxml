@@ -1,0 +1,187 @@
+<view class="template-container">
+    <view class="swiper-tab-warper">
+        <view class="swiper-tab">
+            <view class="swiper-tab-item {{tab==0 ? 'on' : ''}}" data-current="0" bindtap="tabClick">待付款</view>
+            <view class="swiper-tab-item {{tab==1 ? 'on' : ''}}" data-current="1" bindtap="tabClick">配送中</view>
+            <view class="swiper-tab-item {{tab==2 ? 'on' : ''}}" data-current="2" bindtap="tabClick">已经完成</view>
+            <view class="swiper-tab-item {{tab==3 ? 'on' : ''}}" data-current="3" bindtap="tabClick">全部订单</view>
+        </view>
+    </view>
+    <swiper current="{{tab}}" class="swiper-box" duration="300" style="height: 638px;" bindchange="tabSlide">
+        <!-- 第一个序列 待付款 -->
+        <swiper-item class="swiper-detail">
+            <view class="order-container">
+                <view class="list" wx:if="{{toAfford}}" wx:for="{{toAfford}}" data-index="{{index}}">
+                   <view class="list-detail">
+                        <view class="detail-top">
+                                <view class="order-detail">
+                                    <view>{{item.type}}</view>
+                                    <view class="left14">订单号{{item.order_code}}</view>
+                                </view>
+                                <view>状态：{{item.status}}</view>
+                            </view>
+                            <view class="detail-center">
+                               <view class="detail-left"  >
+                                    <view class="detail-info" wx:for="{{item.goods}}" wx:key="{{index}}">
+                                            <view class="detail-column" wx:if="{{index<2}}">
+                                                <view class="circle"><image class="flower-image" src="{{item.image}}"></image></view>
+                                                <view>{{item.name}}</view>
+                                                <view>x{{item.num}}</view>
+                                            </view>
+
+                                            <view class="detail-column" wx:if="{{index==2}}">
+                                                ... ...
+                                            </view>
+                                        </view>
+                               </view>
+                                <view class="detail-list">
+                                    <view>￥{{item.coupon_price}}</view>
+                                    <view>共{{item.goodsNum}}件</view>
+                                </view>
+                            </view>
+                            <view class="detail-bottom">
+                                <view>下单时间：{{item.create_time}}</view>
+                               
+                                <view class="detail-opr">
+                                    <view class="right14 button color-brown">立刻支付</view>
+                                    <view class="button" bindtap="orderToAfford" data-index="{{index}}">查看详情</view>
+                                </view>
+        
+                            </view>
+
+                   </view>
+                </view>
+
+            </view>
+        </swiper-item>
+
+        <!-- 第二个序列 配送中-->
+        <swiper-item class="swiper-detail">
+                <view class="order-container">
+                    <view class="list"  wx:if="{{onTheWay}}" wx:for="{{onTheWay}}"  data-index="{{index}}">
+                       <view class="list-detail">
+                            <view class="detail-top">
+                                    <view class="order-detail">
+                                        <view>{{item.type}}</view>
+                                        <view class="left14">订单号{{item.order_code}}</view>
+                                    </view>
+                                    <view>状态：{{item.status}}</view>
+                                </view>
+                                <view class="detail-center">
+                                   <view class="detail-left"  >
+                                        <view class="detail-info" wx:for="{{item.goods}}" wx:key="{{index}}">
+                                                <view class="detail-column" wx:if="{{index<=5}}">
+                                                    <view class="circle"><image class="flower-image" src="{{item.image}}"></image></view>
+                                                    <view>{{item.name}}</view>
+                                                    <view>x{{item.num}}</view>
+                                                </view>
+                                            </view>
+                                   </view>
+                                    <view class="detail-list">
+                                        <view>￥{{item.coupon_price}}</view>
+                                        <view>共{{item.goodsNum}}件</view>
+                                    </view>
+                                </view>
+                                <view class="detail-bottom">
+                                    <view>下单时间：{{item.create_time}}</view>
+                                   
+                                    <view class="detail-opr">
+                                        <view class="right14 button color-brown">确认收货</view>
+                                        <view class="button" bindtap="confirmReceipt" data-index="{{index}}">查看详情</view>
+                                    </view>
+                                </view>
+    
+                       </view>
+                    </view>
+    
+                </view>
+            </swiper-item>
+
+        <!-- 第三个序列 已经完成-->
+        <swiper-item class="swiper-detail">
+                <view class="order-container">
+                    <view class="list" wx:if="{{complete}}" wx:for="{{complete}}" data-index="{{index}}">
+                       <view class="list-detail">
+                            <view class="detail-top">
+                                    <view class="order-detail">
+                                        <view>{{item.type}}</view>
+                                        <view class="left14">订单号{{item.order_code}}</view>
+                                    </view>
+                                    <view>状态：{{item.status}}</view>
+                                </view>
+                                <view class="detail-center">
+                                   <view class="detail-left"  >
+                                        <view class="detail-info" wx:for="{{item.goods}}" wx:key="{{index}}">
+                                                <view class="detail-column" wx:if="{{index<=5}}">
+                                                    <view class="circle"><image class="flower-image" src="{{item.image}}"></image></view>
+                                                    <view>{{item.name}}</view>
+                                                    <view>x{{item.num}}</view>
+                                                </view>
+                                            </view>
+                                   </view>
+                                    <view class="detail-list">
+                                        <view>￥{{item.coupon_price}}</view>
+                                        <view>共{{item.goodsNum}}件</view>
+                                    </view>
+                                </view>
+                                <view class="detail-bottom">
+                                    <view>下单时间：{{item.create_time}}</view>
+                                   
+                                    <view class="detail-opr">
+                                        <view class="right14 button color-brown">立刻支付</view>
+                                        <view class="button" data-index="{{index}}">查看详情</view>
+                                    </view>
+            
+                                </view>
+    
+                       </view>
+                    </view>
+    
+                </view>
+            </swiper-item>
+
+        <!-- 第四个序列 全部订单-->
+        <swiper-item class="swiper-detail">
+                <view class="order-container">
+                    <view class="list"  wx:if="{{totalList}}"  wx:for="{{totalList}}" data-index="{{index}}">
+                       <view class="list-detail">
+                            <view class="detail-top">
+                                    <view class="order-detail">
+                                        <view>{{item.type}}</view>
+                                        <view class="left14">订单号{{item.order_code}}</view>
+                                    </view>
+                                    <view>状态：{{item.status}}</view>
+                                </view>
+                                <view class="detail-center">
+                                   <view class="detail-left"  >
+                                        <view class="detail-info" wx:for="{{item.goods}}" wx:key="{{index}}">
+                                                <view class="detail-column" wx:if="{{index<=5}}">
+                                                    <view class="circle"><image class="flower-image" src="{{item.image}}"></image></view>
+                                                    <view>{{item.name}}</view>
+                                                    <view>x{{item.num}}</view>
+                                                </view>
+                                            </view>
+                                   </view>
+                                    <view class="detail-list">
+                                        <view>￥{{item.coupon_price}}</view>
+                                        <view>共{{item.goodsNum}}件</view>
+                                    </view>
+                                </view>
+                                <view class="detail-bottom">
+                                    <view>下单时间：{{item.create_time}}</view>
+                                   
+                                    <view class="detail-opr">
+                                        <view class="right14 button color-brown">立刻支付</view>
+                                        <view class="button" bindtap="detailByCondition" data-index="{{index}}">查看详情</view>
+                                    </view>
+            
+                                </view>
+    
+                       </view>
+                    </view>
+    
+                </view>
+            </swiper-item>
+        
+    </swiper>
+</view>

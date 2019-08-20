@@ -50,5 +50,14 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  }
+  },
+  toList: function (e) {
+    console.log("go to map")
+    const index = e.currentTarget.dataset.index;
+    console.log("index show" + index);
+
+    wx.navigateTo({
+      url: './all-list?tab='+index
+    });
+  },
 })

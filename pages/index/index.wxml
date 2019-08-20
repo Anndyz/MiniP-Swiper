@@ -8,6 +8,10 @@
     </block>
   </view>
   <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+    <view data-index="0" bindtap="toList">跳转tab1</view>
+    <view data-index="1" bindtap="toList">跳转tab2</view>
+    <view data-index="2" bindtap="toList">跳转tab3</view>
+    <view data-index="3" bindtap="toList">跳转tab4</view>
+    <!-- <text class="user-motto">{{motto}}</text> -->
   </view>
 </view>
